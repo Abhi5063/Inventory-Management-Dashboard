@@ -1,5 +1,7 @@
 # Stock Inventory Management System
 
+[**🚀 Live Demo**](https://stockly-inventory.onrender.com)
+
 A modern, full-stack inventory management application built with Next.js, React, Prisma, and MongoDB. Features a beautiful UI with glassmorphism effects, smooth animations, and comprehensive business analytics.
 
 ## ✨ Features
