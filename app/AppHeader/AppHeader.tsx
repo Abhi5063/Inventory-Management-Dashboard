@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Package, Home, BarChart2, FileText, Activity, LogOut } from "react-icons/fi";
+import { FiPackage, FiHome, FiBarChart2, FiFileText, FiActivity, FiLogOut } from "react-icons/fi";
 import { useAuth } from "../authContext";
 import { ModeToggle } from "./ModeToggle";
 
