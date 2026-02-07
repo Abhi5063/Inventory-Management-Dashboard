@@ -5,9 +5,11 @@ import bcrypt from "bcryptjs";
 import { MongoClient } from "mongodb";
 
 // const prisma = new PrismaClient();
-name: z.string().min(1),
+
+const registerSchema = z.object({
+  name: z.string().min(1),
   email: z.string().email(),
-    password: z.string().min(6),
+  password: z.string().min(6),
 });
 
 export default async function handler(
