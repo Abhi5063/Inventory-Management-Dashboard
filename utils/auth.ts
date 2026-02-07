@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import prisma from "@/lib/prisma";
 import { User as PrismaUser } from "@prisma/client";
 import Cookies from "js-cookie"; // Import js-cookie
+import { NextApiRequest, NextApiResponse } from "next";
 
 // const prisma = new PrismaClient();
 
