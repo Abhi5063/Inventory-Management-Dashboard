@@ -53,7 +53,7 @@ export default function AppHeader() {
               className="flex aspect-square size-12 items-center justify-center rounded-xl gradient-primary shadow-lg cursor-pointer hover-lift"
               onClick={() => handleNavigation("/")}
             >
-              <Package className="text-2xl text-white" />
+              <FiPackage className="text-2xl text-white" />
             </div>
             <div className="text-center sm:text-left">
               <h1 className="text-xl font-bold gradient-text">
@@ -71,7 +71,7 @@ export default function AppHeader() {
               onClick={() => handleNavigation("/")}
               className="hover:bg-primary/10 transition-all"
             >
-              <Home className="mr-2 h-4 w-4" />
+              <FiHome className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">Dashboard</span>
             </Button>
 
@@ -81,7 +81,7 @@ export default function AppHeader() {
               onClick={() => handleNavigation("/business-insights")}
               className="hover:bg-primary/10 transition-all"
             >
-              <BarChart2 className="mr-2 h-4 w-4" />
+              <FiBarChart2 className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">Insights</span>
             </Button>
 
@@ -91,7 +91,7 @@ export default function AppHeader() {
               onClick={() => handleNavigation("/api-docs")}
               className="hover:bg-primary/10 transition-all"
             >
-              <FileText className="mr-2 h-4 w-4" />
+              <FiFileText className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">API Docs</span>
             </Button>
 
@@ -101,7 +101,7 @@ export default function AppHeader() {
               onClick={() => handleNavigation("/api-status")}
               className="hover:bg-primary/10 transition-all"
             >
-              <Activity className="mr-2 h-4 w-4" />
+              <FiActivity className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">Status</span>
             </Button>
 
@@ -122,7 +122,7 @@ export default function AppHeader() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <LogOut className="h-4 w-4" />
+                  <FiLogOut className="h-4 w-4" />
                   <span className="hidden sm:inline">Logout</span>
                 </div>
               )}
