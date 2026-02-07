@@ -57,6 +57,7 @@ export const verifyToken = (token: string): { userId: string } | null => {
   }
 };
 
+// Helper to get session on server side
 export const getSessionServer = async (
   req: NextApiRequest,
   res: NextApiResponse
