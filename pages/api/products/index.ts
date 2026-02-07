@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { getSessionServer } from "@/utils/auth";
 import { MongoClient } from "mongodb";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -46,7 +46,7 @@ export default async function handler(
             createdAt: new Date(),
           },
         });
-        
+
         // Fetch category and supplier data for the response
         const category = await prisma.category.findUnique({
           where: { id: categoryId },
@@ -54,7 +54,7 @@ export default async function handler(
         const supplier = await prisma.supplier.findUnique({
           where: { id: supplierId },
         });
-        
+
         // Return the created product data with category and supplier names
         res.status(201).json({
           id: product.id,
