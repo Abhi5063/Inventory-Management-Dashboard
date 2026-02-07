@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const createSupplier = async (data: {
   name: string;

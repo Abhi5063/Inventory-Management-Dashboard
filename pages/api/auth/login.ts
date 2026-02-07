@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../../../utils/auth";
 import Cookies from "cookies";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient(); // Removed duplicate instantiation
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   const origin = req.headers.origin;

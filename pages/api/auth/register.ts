@@ -1,15 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { MongoClient } from "mongodb";
 
-const prisma = new PrismaClient();
-
-const registerSchema = z.object({
-  name: z.string().min(1),
+// const prisma = new PrismaClient();
+name: z.string().min(1),
   email: z.string().email(),
-  password: z.string().min(6),
+    password: z.string().min(6),
 });
 
 export default async function handler(
@@ -33,21 +31,21 @@ export default async function handler(
     // Use MongoDB client directly to bypass Prisma constraints
     const mongoClient = new MongoClient(process.env.DATABASE_URL!);
     await mongoClient.connect();
-    
+
     const db = mongoClient.db();
     const userCollection = db.collection('User');
-    
+
     // Generate a unique username
     const baseUsername = email.split('@')[0];
     let username = baseUsername;
     let counter = 1;
-    
+
     // Check if username exists and generate a unique one
     while (await userCollection.findOne({ username })) {
       username = `${baseUsername}${counter}`;
       counter++;
     }
-    
+
     const user = await userCollection.insertOne({
       name,
       email,
@@ -55,9 +53,9 @@ export default async function handler(
       username,
       createdAt: new Date(),
     });
-    
+
     await mongoClient.close();
-    
+
     // Get the created user from Prisma
     const createdUser = await prisma.user.findUnique({
       where: { email },

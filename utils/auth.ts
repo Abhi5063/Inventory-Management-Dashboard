@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { PrismaClient, User as PrismaUser } from "@prisma/client";
+import prisma from "@/lib/prisma";
+import { User as PrismaUser } from "@prisma/client";
 import Cookies from "js-cookie"; // Import js-cookie
-import { NextApiRequest, NextApiResponse } from "next";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
@@ -27,20 +27,20 @@ export const verifyToken = (token: string): { userId: string } | null => {
   if (!token || token === "null" || token === "undefined") {
     return null;
   }
-  
+
   // Only verify tokens on the server side
   if (!isServer) {
     // On client side, we'll just return null to avoid JWT library issues
     return null;
   }
-  
+
   try {
     // Check if jwt is properly imported
     if (typeof jwt === 'undefined' || !jwt.verify) {
       console.error("JWT library not properly loaded");
       return null;
     }
-    
+
     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
     // Debug log - only log in development
     if (process.env.NODE_ENV === 'development') {
