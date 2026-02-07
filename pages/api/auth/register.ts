@@ -52,10 +52,14 @@ export default async function handler(
     });
 
     res.status(201).json({ id: createdUser.id, name: createdUser.name, email: createdUser.email });
-  } catch (error) {
+    // Log the error for debugging
+    console.error("Registration Error:", error);
     if (error instanceof Error) {
-      res.status(500).json({ error: error.message });
+      console.error("Error message:", error.message);
+      console.error("Error stack:", error.stack);
+      res.status(500).json({ error: error.message, stack: error.stack });
     } else {
+      console.error("Unknown error:", error);
       res.status(500).json({ error: "An unknown error occurred" });
     }
   }
