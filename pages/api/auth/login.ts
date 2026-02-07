@@ -7,22 +7,16 @@ import Cookies from "cookies";
 const prisma = new PrismaClient();
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
-  const allowedOrigins = [
-    "https://stockly-inventory.vercel.app",
-    "https://stockly-inventory-managment-nextjs-ovlrz6kdv.vercel.app",
-    "https://stockly-inventory-managment-nextjs-arnob-mahmuds-projects.vercel.app",
-    "https://stockly-inventory-managment-n-git-cc3097-arnob-mahmuds-projects.vercel.app",
-    req.headers.origin,
-  ];
   const origin = req.headers.origin;
 
-  if (origin && allowedOrigins.includes(origin)) {
+  if (origin) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   } else {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://stockly-inventory.vercel.app"
-    );
+    // Check if it's a production environment
+    const isProduction = process.env.NODE_ENV === "production";
+    // In production without origin (e.g. server-side), be restrictive or allow specific
+    // For now, mirroring origin if present is best for browser usage.
+    res.setHeader("Access-Control-Allow-Origin", "*");
   }
 
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");

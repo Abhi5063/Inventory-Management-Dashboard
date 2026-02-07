@@ -63,7 +63,7 @@ export const metadata = {
     title: "Stockly - Inventory Management System",
     description:
       "Efficiently manage your product inventory with Stockly, a secure and responsive Next.js web application.",
-    url: "https://stockly-inventory.vercel.app/",
+    url: "https://stockly-inventory.onrender.com/",
     images: [
       {
         url: "https://github.com/user-attachments/assets/7495dcfb-c7cb-44e6-a1ef-d82930a8ada7",
