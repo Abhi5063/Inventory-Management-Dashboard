@@ -30,42 +30,26 @@ export default async function handler(
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Use MongoDB client directly to bypass Prisma constraints
-    const mongoClient = new MongoClient(process.env.DATABASE_URL!);
-    await mongoClient.connect();
-
-    const db = mongoClient.db();
-    const userCollection = db.collection('User');
-
-    // Generate a unique username
+    // Generate unique username using Prisma
     const baseUsername = email.split('@')[0];
     let username = baseUsername;
     let counter = 1;
 
     // Check if username exists and generate a unique one
-    while (await userCollection.findOne({ username })) {
+    while (await prisma.user.findUnique({ where: { username } })) {
       username = `${baseUsername}${counter}`;
       counter++;
     }
 
-    const user = await userCollection.insertOne({
-      name,
-      email,
-      password: hashedPassword,
-      username,
-      createdAt: new Date(),
+    const createdUser = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        username,
+        createdAt: new Date(),
+      },
     });
-
-    await mongoClient.close();
-
-    // Get the created user from Prisma
-    const createdUser = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (!createdUser) {
-      return res.status(500).json({ error: "Failed to create user" });
-    }
 
     res.status(201).json({ id: createdUser.id, name: createdUser.name, email: createdUser.email });
   } catch (error) {
